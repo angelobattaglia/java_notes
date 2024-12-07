@@ -1,6 +1,11 @@
 # Introduction
 
-The book of notes I wish I had when starting out with Java
+The book of notes I wish I had when starting out with Java.
+Three resources:
+
+- [Use the official API docs](https://docs.oracle.com/javase/8/docs/api/)
+- [Use a Java 8 Book]()
+- [Java 8 distribution of choice](https://docs.aws.amazon.com/corretto/latest/corretto-8-ug/downloads-list.html)
 
 ## Deploying locally
 
