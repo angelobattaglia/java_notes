@@ -1,7 +1,22 @@
 site_name: Java Notes
 
+site_url: https://angelobattaglia.github.io/java_notes
 theme:
+  # name of the extension material for mkdocs
   name: material
+  # Setting up the logo and the favicon
+  # favicon: images/favicon.ico
+  # logo: images/sys.png
+  # features, more on these if you visit the "Contribute" page
+  features:
+    - content.code.copy
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.indexes
+    - navigation.sections
+    - navigation.path
+  palette:
+    primary: deep purple
 
 markdown_extensions:
   - pymdownx.arithmatex:
@@ -12,3 +27,21 @@ extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
+nav:
+  - Home: index.md
+  - Maven:
+      - Introduction to Maven: Maven/Intro.md
+  - IO:
+      - Basic I/O: IO/IO.md
+      - File I/O: IO/Read-Files.md
+  - Collections:
+      - Collections: Collections/Collections.md
+      - Array Lists: Collections/ArrayList.md
+      - HashMaps: Collections/HashMap.md
+      - SortedMaps: Collections/SortedMaps.md
+      - LinkedLists: Collections/LinkedList.md
+  - OOP:
+      - Polymorphism: OOP/Polymorphism.md
+      - Abstract Classes: OOP/Abstract_Classes.md
+  - Streams:
+      - Streams: Streams/Streams.md
