@@ -29,6 +29,8 @@ extra_javascript:
 
 nav:
   - Home: index.md
+  - Java's Package System:
+      - Java's Package System: PackageSystem/packages.md
   - Maven:
       - Introduction to Maven: Maven/Intro.md
   - IO:
