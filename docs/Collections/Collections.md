@@ -68,3 +68,15 @@ Map<String, String> map2 = new TreeMap<String, String>();
 Map<String, String> map3 = new LinkedHashMap<String, String>();
 ```
 
+## The `Collection` Root Interface
+
+```java
+// A root interface more flexible (for example can change from Map to Set), 
+// so if we wanna in a common use, just Collection ia enough.
+
+Collection<Customer> customers = new ArrayList<>();
+
+// Since it's a root interface, we can use the same way as List, Map to access, remove etc.
+customers.add(s);
+```
+
