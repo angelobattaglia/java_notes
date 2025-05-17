@@ -80,3 +80,15 @@ Collection<Customer> customers = new ArrayList<>();
 customers.add(s);
 ```
 
+## The return value of Collection method
+```java
+public Collection<String> restaurants() {
+		return new LinkedList<>(restaurants.keySet());
+}
+	// keySet() is a method of Map Interface，return all the Key's view of Set<String>
+    
+	// These codes means: 
+    // Transfer all the Key of 'restaurants' into a Set, and then use this Set create a new LinkedList.
+	
+```
+
