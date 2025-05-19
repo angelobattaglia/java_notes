@@ -80,6 +80,18 @@ Collection<Customer> customers = new ArrayList<>();
 customers.add(s);
 ```
 
+```java
+//	method 'clear()' is defined in java.util.Collection interface
+//  Remove all the elements in List/Set/Queue/Map(remove both Key and Value)
+
+//  Example in lab3 WorkingHours.java
+
+	workingHours.clear();
+//  Remove first, make sure add brand new time period after.
+	
+```
+
+
 ## The return value of Collection method
 ```java
 public Collection<String> restaurants() {
