@@ -10,3 +10,6 @@ mkdocs build
 mkdocs serve
 ```
 
+```shell
+mkdocs gh-deploy
+```
