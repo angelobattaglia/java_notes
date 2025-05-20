@@ -44,6 +44,8 @@ nav:
       - LinkedLists: Collections/LinkedList.md
   - OOP:
       - Polymorphism: OOP/Polymorphism.md
-      - Abstract Classes: OOP/Abstract_Classes.md
+      - Abstract Classes: OOP/Interfaces.md
+      - Enums: OOP/enum.md
+      - Object-Search: OOP/Object-Search.md
   - Streams:
       - Streams: Streams/Streams.md
