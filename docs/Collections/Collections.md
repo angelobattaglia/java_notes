@@ -68,6 +68,18 @@ Map<String, String> map2 = new TreeMap<String, String>();
 Map<String, String> map3 = new LinkedHashMap<String, String>();
 ```
 
+```java
+computeIfAbsent( key, mappingFunction);
+// if key exists, return it's value.
+// if key doesn't exist, use the mappingFunction to calculate value.
+
+// examples:
+return map.computeIfAbsent(key, k -> computeValue(k)); 
+map.computeIfAbsent("fruits", k -> new ArrayList<>()).add("apple");
+// 查找"fruits"键是否存在，若是存在返回对应的值，若不存在，则创建一个arraylist并把apple作为对应的值。
+```
+
+
 ## The `Collection` Root Interface
 
 ```java
