@@ -23,3 +23,9 @@ Automatically available package.
 // Transfer first element of String 'hm' to an integer. 
 
 ```
+
+# trim()
+Removes all space characters from the beginning and end of a string.
+```java
+    String province = fields[0].trim();  
+```
