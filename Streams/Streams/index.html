@@ -1083,15 +1083,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#imports" class="md-nav__link">
-    <span class="md-ellipsis">
-      Imports
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1143,15 +1134,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#imports" class="md-nav__link">
-    <span class="md-ellipsis">
-      Imports
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1175,6 +1157,53 @@
 </blockquote>
 <p>quote: <a href="https://winterbe.com/">this man</a></p>
 <h2 id="lambda-expressions">Lambda Expressions</h2>
+<p>'.' means:
+Directly invoking method or access properties. </p>
+<pre><code class="language-java">Class.staticMethod()
+```java
+
+'::' means:
+Passing methods as parameters to functional interfaces.
+将[方法]作为[参数]传递给函数式接口
+It is a short form of Lambda.
+
+```java
+stream.map(String::toUpperCase)
+</code></pre>
+<h1 id="basic-concepts-of-stream">Basic Concepts of stream</h1>
+<ol>
+<li>Source operations:
+Create: Generate a stream from a data source (collection, array, etc.).</li>
+</ol>
+<pre><code class="language-java">Stream&lt;String&gt; stream = list.stream();
+// or
+Stream&lt;String&gt; parallelStream = list.parallelStream(); 
+</code></pre>
+<ol>
+<li>Intermediate Operations: 
+Define data processing logic (such as filtering, mapping).</li>
+</ol>
+<pre><code class="language-java">.filter(n -&gt; n % 2 == 0)  // 保留偶数
+.map(String::toUpperCase)  // 转换为大写
+.flatMap(List::stream)  // 扁平化为单个流
+.distinct()
+.sorted()                   // natural order
+.skip(5)    // 跳过前5个（0-4）
+.limit(3)   // 取接下来的3个
+</code></pre>
+<ol>
+<li>Terminal Operations:
+Trigger the actual calculation and generate results.</li>
+</ol>
+<pre><code class="language-java">.collect(Collectors.toList());      
+.forEach(System.out::println);
+.reduce(0, Integer::sum);
+.findFirst();
+.findAny();
+.max(Integer::compare);
+.count();
+.min();
+</code></pre>
 <p>To put it simple, see how the following code gets
 shortened at each step:</p>
 <p>Step 1</p>
@@ -1204,12 +1233,27 @@ return b.compareTo(a);
 Arrays.asList(&quot;a1&quot;, &quot;a2&quot;, &quot;b1&quot;, &quot;c2&quot;, &quot;c1&quot;);
 
 myList
-.stream()
-.filter(s -&gt; s.startsWith(&quot;c&quot;))
+.stream()                            // 1. Create operation
+.filter(s -&gt; s.startsWith(&quot;c&quot;))      // 2. Middle operations
 .map(String::toUpperCase)
 .sorted()
-.forEach(System.out::println);
+.forEach(System.out::println);       // 3. Terminal operation
 </code></pre>
+<p>Some Characteristics:</p>
+<ol>
+<li>
+<p>Non-Reusability
+A Stream can be consumed only once.</p>
+</li>
+<li>
+<p>Lazy Evaluation (Delayed Execution)
+ Actual computation happens when a terminal operation (e.g., collect, forEach) is invoked.</p>
+</li>
+<li>
+<p>Parallel Processing
+Streams can leverage multicore processors via parallel execution.</p>
+</li>
+</ol>
 
 
 

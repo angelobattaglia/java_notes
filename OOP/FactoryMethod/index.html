@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://angelobattaglia.github.io/java_notes/OOP/Package-Java.lang-method/">
+        <link rel="canonical" href="https://angelobattaglia.github.io/java_notes/OOP/FactoryMethod/">
       
       
       
@@ -18,7 +18,7 @@
     
     
       
-        <title>About method in java.lang - Java Notes</title>
+        <title>Factory Method - Java Notes</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#about-method-in-javalang" class="md-skip">
+        <a href="#factory-method" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              About method in java.lang
+              Factory Method
             
           </span>
         </div>
@@ -1073,29 +1073,60 @@
 
 
 
-<h1 id="about-method-in-javalang">About method in java.lang</h1>
-<p>Automatically available package.</p>
-<h1 id="1-split">1 split</h1>
-<pre><code class="language-java">/* The split method belongs to the String class, which is part of the java.lang package. This package is automatically imported in all Java programs
-*/
+<h1 id="factory-method">Factory Method</h1>
+<p>Encapsulating the <strong>object creation</strong> process.</p>
+<p>Makes the code more flexible, extensible, and easy to maintain.</p>
+<p>Processing a "new" objects to a method instead of using "new" directly in the code.</p>
+<h1 id="difference-from-interface">Difference from Interface</h1>
+<p>Interface:</p>
+<pre><code class="language-java">    public interface Animal {
+        void makeSound();
+    }
 
-// How to use: Splits a String into an array of substrings using &quot;:&quot; as the delimiter.
+    // in class
+    public class Dog implements Animal {
+        public void makeSound() {
+            System.out.println(&quot;Woof!&quot;);
+        }
+    }
 
- String[] hm = time.split(&quot;:&quot;);
-//  &quot;10:30&quot; → [&quot;10&quot;, &quot;30&quot;] 
-// Example from lab3 Time.java
+    public class Cat implements Animal {
+        public void makeSound() {
+            System.out.println(&quot;Meow!&quot;);
+        }
+    }
 </code></pre>
-<h1 id="2-parseint">2 parseInt</h1>
-<pre><code class="language-java">//   Converts a String to an int.
+<p>Factory Method:</p>
+<pre><code class="language-java">public class AnimalFactory {
 
-    h = Integer.parseInt(hm[0]);
+    public static Animal createAnimal(String type) {
+        if (type.equalsIgnoreCase(&quot;dog&quot;)) {
+            return new Dog(); // 返回的是实现了 Animal 接口的类
+        } else if (type.equalsIgnoreCase(&quot;cat&quot;)) {
+            return new Cat();
+        } else {
+            throw new IllegalArgumentException(&quot;Unknown animal type&quot;);
+        }
+    }
+}
 
-// Transfer first element of String 'hm' to an integer. 
+Animal a = AnimalFactory.createAnimal(&quot;dog&quot;);
+a.makeSound();      // output: &quot;Woof!&quot;
 
 </code></pre>
-<h1 id="trim">trim()</h1>
-<p>Removes all space characters from the beginning and end of a string.</p>
-<pre><code class="language-java">    String province = fields[0].trim();  
+<p>接口：定义了“能做什么”（行为规范）。</p>
+<p>工厂方法：定义了“创建谁来做”（具体实现的选择逻辑）。</p>
+<p>接口描述“应该有什么”，而工厂方法决定“到底要用哪一个类来实现这个接口”。</p>
+<pre><code class="language-java">    // Lab 4:
+    public Municipality createOrGetMunicipality(String name, String province, Integer altitude) {
+        return municipalities.computeIfAbsent(name, 
+            k -&gt; new Municipality(name, province, altitude));
+    }
+
+    public MountainHut createOrGetMountainHut(String name, Arguments...) {
+        return mountainHuts.computeIfAbsent(name, 
+                    k -&gt; new MountainHut(name, Arguments...));
+    }
 </code></pre>
 
 
