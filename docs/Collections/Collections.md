@@ -47,6 +47,8 @@ Set<String> set3 = new LinkedHashSet<String>();
 
 ## Maps
 
+**Map is not a part of Collection**
+
 - Key-value pairs (i.e. ```<String, Integer>```, ```<String, Integer, Double, String>```, ...)
 - Retrieving a value by key is fast
 - Iterating over maps is slow
