@@ -31,6 +31,8 @@ Create: Generate a stream from a data source (collection, array, etc.).
 Stream<String> stream = list.stream();
 // or
 Stream<String> parallelStream = list.parallelStream(); 
+
+return mountainHuts.values().stream().
 ```
 
 2. Intermediate Operations: 
@@ -122,3 +124,114 @@ A Stream can be consumed only once.
 
 3. Parallel Processing
 Streams can leverage multicore processors via parallel execution.
+
+
+Example in lab 4 (R4):
+```java
+    public Map<String, Long> countMunicipalitiesPerProvince() {
+		return mountainHuts.values().stream()           
+					.map(MountainHut::getMunicipality)
+					.distinct()
+					.collect(Collectors.groupingBy(Municipality::getProvince, 
+								Collectors.counting()));
+	}
+```
+        1. mountainHuts is a Map, we have to transfer it first(Because Map is not part of Collection! ).
+        
+        2. map in stream means transfer one data type to another data typ (Here we have MountainHut，but we need the Municipality they belongs to, so method reference and transfer).
+        
+        3. collect() means collect results into a Set(Natural language) or Result(Natural language).
+        
+        4. Collectors is a Utility Class(工具类)，defined some collectors.
+
+**Examples Below** 
+
+
+```java
+    .collect(toList())          // become List
+    .collect(toSet())           // become Set
+    .collect(groupingBy(...))   // become Map（Accroding to the group）
+```
+**How to collect**
+```java
+public Map<Integer, List<Cell>> groupByAliveNeighborCount(Generation gen) {
+        return gen.getAliveCells().stream()
+                            .collect(Collectors.groupingBy(
+                                Cell::countAliveNeighbors, Collectors.toList()
+                            //  分组的 key ↑   @para1       ↑ 分组后的value收集方式 @para2    
+                                )
+                            );
+}
+
+@para1
+// 每个元素（Cell）都会调用 countAliveNeighbors()，得到一个 int，用于分组。
+
+@para2
+// 分组后，每一组的元素如何收集。
+// 它告诉 Java Stream：“请把分到同一组的元素放进一个 List ”
+```
+
+## Collectors.
+A powerful tool.
+```java
+Collectors.groupingBy(classifier)        // 按条件分组
+Collectors.groupingBy(classifier, downstreamCollector)  // 分组后进一步处理
+// Example 
+groupingBy(Employee::getDepartment)
+
+groupingBy(Employee::getDept, summingInt(Employee::getSalary))
+
+
+Collectors.partitioningBy(predicate)	//  按布尔条件分为两个分区（true/false）	
+// Example
+partitioningBy(e -> e.getSalary() > 5000)
+
+Collectors.partitioningBy(predicate, downstreamCollector)	//  分区后进一步处理
+// Example
+partitioningBy(e -> e.getSalary() > 5000, toSet())
+
+
+Collectors.mapping(mapper, downstream)	//  对元素映射后再收集	
+// Example
+mapping(Employee::getName, toList())
+
+Collectors.collectingAndThen()	        //  收集后执行额外转换
+// Example in Team Project
+public Map<CellType, Integer> countCellsByType(Generation gen) {
+        return gen.getAliveCells().stream()
+                                .collect(Collectors.groupingBy(Cell::getType),
+                                            Collectors.collectingAndThen(Collectors.counting(),Long::intValue));
+    }
+```
+
+```java
+import static java.util.stream.Collectors.*;
+    //  ↑ If we do the static import, 'Collectors.' can be ignored.
+
+    Collectors.groupingBy(...)
+    // 直接 groupingBy(...) if we import static...        
+    Collectors.counting()
+    Collectors.mapping(...)
+    // mapping(): Further transform each item in a group or aggregation.
+
+    .map()                      // 作用于流本身
+    Collectors.mapping(...)     // 用于 collect 的“嵌套映射”
+    Collectors.summingInt(...)  // Calculate sum with Integer type.
+    
+    Collectors.summarizingInt(...)
+//  Compute summary statistics for a collection of int values.
+//  count, sum, min, max, average respectively. So powerful!
+```
+
+```java
+/**
+	 * Count the number of mountain huts per each municipality within each province.
+	 * 
+	 * @return a map with the province as key and, as value, a map with the
+	 *         municipality as key and the number of mountain huts as value
+	 */
+	public Map<String, Map<String, Long>> countMountainHutsPerMunicipalityPerProvince() {
+		return mountainHuts.values().stream()
+					.collect(Collectors.groupingBy(h -> h.getMunicipality().getProvince(),
+									Collectors.groupingBy(l -> l.getMunicipality().getName(),Collectors.counting())));}
+```

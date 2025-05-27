@@ -29,3 +29,18 @@ Removes all space characters from the beginning and end of a string.
 ```java
     String province = fields[0].trim();  
 ```
+
+# orElse() *in Optional.java
+Used to handle Optional results that may be empty.
+
+```java
+    String name = optionalName.orElse("Default Name");
+```
+Can be used in stream API, but only used in terminal operation(because only terminal operation can return Optional object).
+
+```java
+    String result = names.stream()
+                        .filter(name -> name.startsWith("A"))
+                        .findFirst()            // return Optional<String>
+                        .orElse("Unknown");     // Terminal 
+```
