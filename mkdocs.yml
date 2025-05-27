@@ -29,6 +29,8 @@ extra_javascript:
 
 nav:
   - Home: index.md
+  - Java's Package System:
+      - Java's Package System: PackageSystem/packages.md
   - Maven:
       - Introduction to Maven: Maven/Intro.md
   - IO:
@@ -42,6 +44,8 @@ nav:
       - LinkedLists: Collections/LinkedList.md
   - OOP:
       - Polymorphism: OOP/Polymorphism.md
-      - Abstract Classes: OOP/Abstract_Classes.md
+      - Abstract Classes: OOP/Interfaces.md
+      - Enums: OOP/enum.md
+      - Object-Search: OOP/Object-Search.md
   - Streams:
       - Streams: Streams/Streams.md
