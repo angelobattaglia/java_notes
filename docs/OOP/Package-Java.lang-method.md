@@ -30,7 +30,7 @@ Removes all space characters from the beginning and end of a string.
     String province = fields[0].trim();  
 ```
 
-# orElse() *in Optional.java
+# orElse()  in Optional.java
 Used to handle Optional results that may be empty.
 
 ```java
@@ -43,4 +43,18 @@ Can be used in stream API, but only used in terminal operation(because only term
                         .filter(name -> name.startsWith("A"))
                         .findFirst()            // return Optional<String>
                         .orElse("Unknown");     // Terminal 
+//      .orElse() 会返回 Optional 中的值（如果存在），但无论如何都会先执行参数表达式。
 ```
+
+## orElseThrow()    in Optional.java
+
+```java
+//  .orElseThrow() 在类型上解包了 Optional，在行为上返回 Optional 里已有的值本身（如果存在），否则抛异常。
+ Person p = personRepository.findById(code)
+                              .orElseThrow(NoSuchCodeException::new);
+// 这里不加orElseThrow会报错，因为把 Optional<Person> 对象赋值给了 Person p对象，而orElseThrow() 是 Optional<T> 的方法，调用后返回类型就是 T（比如 Person），所以你可以直接赋值给 Person 类型变量。（解开了）
+```
+
+## isPresent() 
+是 Optional 的方法，意思是“这个容器里有值吗？
+
