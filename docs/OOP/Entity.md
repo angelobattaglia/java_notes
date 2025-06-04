@@ -4,6 +4,19 @@
 @OneToMany
 @ManyToOne
 @ManyToMany
+```
+
+## Fetch Type
+```java
+@ManyToMany(fetch = FetchType.EAGER)
+// Eager, immediately load.
+
+@ManyToMany(fetch = FetchType.LAZY)
+// Lazy, only will be loaded when we use it. 
+
+```
+
+```java
 
 // Example of Entity
 @Entity
